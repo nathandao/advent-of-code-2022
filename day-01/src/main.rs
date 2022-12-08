@@ -9,23 +9,27 @@ fn main() {
 
     let elfs = contents.split("\n\n").collect::<Vec<_>>();
 
-    let total_calories = elfs
+    let mut total_calories = elfs
         .into_iter()
         .map(|elf| {
             elf.split("\n")
-                .filter_map(|calories| calories.parse::<usize>().ok())
+                .filter_map(|calories| calories.parse::<i32>().ok())
                 .sum()
         })
-        .collect::<Vec<_>>();
+        .collect::<Vec<i32>>();
 
-    let mut result = 0;
-    let mut max = 0;
-    for (idx, total) in total_calories.iter().enumerate() {
-        if *total > max {
-            max = *total;
-            result = idx + 1;
-        }
-    }
+    total_calories.sort_by(|a, b| b.cmp(a));
 
-    print!("Result: {}\n", result)
+    print!(
+        "Top 3 elfs: {}\n",
+        total_calories[..3]
+            .iter()
+            .map(|c| c.to_string())
+            .collect::<Vec<_>>()
+            .join(", ")
+    );
+    print!(
+        "Total top 3 elfs: {}\n",
+        total_calories[..3].iter().sum::<i32>().to_string()
+    )
 }
