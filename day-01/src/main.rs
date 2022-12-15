@@ -28,6 +28,7 @@ fn main() {
             .collect::<Vec<_>>()
             .join(", ")
     );
+
     print!(
         "Total top 3 elfs: {}\n",
         total_calories[..3].iter().sum::<i32>().to_string()
