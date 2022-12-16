@@ -56,11 +56,9 @@ fn solve(contents: String, use_rev: bool) -> String {
 
         if use_rev {
             let mut_stash = &mut stash.iter().rev().map(|c| *c).collect::<Vec<char>>();
-
             stacks[m[2]].append(mut_stash);
         } else {
             let mut_stash = &mut stash;
-
             stacks[m[2]].append(mut_stash);
         }
     }
