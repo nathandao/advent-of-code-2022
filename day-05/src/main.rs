@@ -17,7 +17,6 @@ fn main() {
 
 fn solve(contents: String, use_rev: bool) -> String {
     let content_lines: Vec<&str> = contents.lines().collect();
-
     let stack_lines: Vec<&str> = content_lines[0..8].to_vec();
     let mut stacks: Vec<Vec<char>> = vec::from_elem(vec![], 9);
 
@@ -47,9 +46,7 @@ fn solve(contents: String, use_rev: bool) -> String {
 
     for m in moves.clone() {
         let count = m[0];
-
         let source = &mut stacks[m[1]];
-
         let mut stash = source[(source.len() - count)..].to_vec();
 
         source.truncate(source.len() - stash.len());
