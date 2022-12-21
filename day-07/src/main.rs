@@ -41,6 +41,16 @@ fn main() {
         .sum::<usize>();
 
     println!("Part 1: {}", part1_result);
+
+    let target_space = 30000000 - (70000000 - directories.get("/").unwrap());
+
+    let mut valids = directories
+        .values()
+        .filter(|v| **v >= target_space)
+        .collect::<Vec<&usize>>();
+
+    valids.sort();
+    println!("Part 2: {}", valids[0]);
 }
 
 fn update_dir_size(directories: &mut HashMap<String, usize>, dir: String, file_size: usize) {
