@@ -44,4 +44,59 @@ fn main() {
     }
 
     println!("Part 1: {}", visible_count);
+
+    let mut max_score: usize = 0;
+
+    for i in 1..(rows - 1) {
+        for j in 1..(cols - 1) {
+            let tree_h = grid[i][j];
+            let mut left: usize = 1;
+            let mut right: usize = 1;
+            let mut top: usize = 1;
+            let mut down: usize = 1;
+
+            // left
+            let mut current_h = 0;
+            while current_h < tree_h && left < j {
+                current_h = grid[i][j - left - 1];
+                if current_h <= tree_h {
+                    left += 1;
+                }
+            }
+
+            // right
+            current_h = 0;
+            while current_h < tree_h && right < cols - j - 1 {
+                current_h = grid[i][j + right + 1];
+                if current_h <= tree_h {
+                    right += 1;
+                }
+            }
+
+            // top
+            current_h = 0;
+            while current_h < tree_h && top < i {
+                current_h = grid[i - top - 1][j];
+                if current_h <= tree_h {
+                    top += 1;
+                }
+            }
+
+            // down
+            current_h = 0;
+            while current_h < tree_h && down < rows - i - 1 {
+                current_h = grid[i + down + 1][j];
+                if current_h <= tree_h {
+                    down += 1;
+                }
+            }
+
+            let score = left * right * top * down;
+            if score > max_score {
+                max_score = score;
+            }
+        }
+    }
+
+    println!("Part 2: {}", max_score);
 }
