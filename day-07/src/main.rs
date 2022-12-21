@@ -54,19 +54,20 @@ fn main() {
 }
 
 fn update_dir_size(directories: &mut HashMap<String, usize>, dir: String, file_size: usize) {
-    directories
-        .entry(dir.clone())
-        .and_modify(|v| *v += file_size)
-        .or_insert(file_size);
-
     let mut current_dir = dir.clone();
+    let mut done = false;
 
-    while current_dir != "/" {
-        let paths = current_dir.split("/").collect::<Vec<&str>>();
-        current_dir = paths[..paths.len() - 2].join("/") + "/";
+    while !done {
         directories
             .entry(current_dir.clone())
             .and_modify(|v| *v += file_size)
             .or_insert(file_size);
+
+        if current_dir == "/" {
+            done = true;
+        } else {
+            let paths = current_dir.split("/").collect::<Vec<&str>>();
+            current_dir = paths[..paths.len() - 2].join("/") + "/";
+        }
     }
 }
