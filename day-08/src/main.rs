@@ -46,7 +46,6 @@ fn main() {
     println!("Part 1: {}", visible_count);
 
     let mut max_score: usize = 0;
-
     for i in 1..(rows - 1) {
         for j in 1..(cols - 1) {
             let tree_h = grid[i][j];
